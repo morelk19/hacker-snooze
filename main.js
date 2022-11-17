@@ -1,7 +1,7 @@
-let button = document.querySelector("#storyButton")
+let button = document.querySelector("#storyButton");
+let comments = document.querySelector("#comments");
+
 let count = 1;
-
-
 
 
 button.addEventListener("click", function(){
@@ -14,8 +14,6 @@ button.addEventListener("click", function(){
         }
         count = 1;
         
-
-
         // TODO:
         // * For each ID...
         //   * Make an API request to get the story's details
@@ -29,7 +27,6 @@ let itemAPIrequest = async(itemNum, row) =>{
     
     let data = await response.json();
 
-    console.log(data);
     let comments = 0;
 
     if (data.kids === undefined){
@@ -38,27 +35,36 @@ let itemAPIrequest = async(itemNum, row) =>{
         comments = data.kids.length;
     }
 
-
-    addRow(data.url, data.title, data.score, comments, data.by)
-
-
-
+    addRow(data.url, data.title, data.score, comments, data.by, itemNum)
     
 }
-function addRow(url, title, score, numComments, authorsUser) {
+function addRow(url, title, score, numComments, authorsUser, itemNum) {
     let table = document.querySelector("#myTable");
+    commentAPIrequest(itemNum);
 
     let template = `
     <tr>
-    <th table-striped scope=\'row\'>${count}</th>
-    <td>${url}</td>
-    <td><a href=\'${url}\' class="link-primary">${title}</a></td>
-    <td>${score}</td>
-    <td>${numComments}</td>
-    <td>${authorsUser}</td>
+    <th table-striped scope=\'column\'>${count}</th>
+    <td scope="col" class="column">${url}</td>
+    <td scope="col"class="column" ><a href=\'${url}\' class="link-primary">${title}</a></td>
+    <td scope="col"class="column" >${score}</td>
+    <td scope="col"class="column"><a href=\'\' class="link-primary">${numComments}</a></td>
+    <td scope="col"class="column" >${authorsUser}</td>
 </tr>
 `;
 table.innerHTML += template;
 count++;
 
+}
+
+let commentAPIrequest = async(itemNum) =>{
+    let response = await fetch(`https://news.ycombinator.com/item?id=${itemNum}`);
+    
+    let data = await response.json();
+
+    console.log(data);
+
+
+  
+    
 }

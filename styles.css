@@ -1,3 +1,5 @@
+
+  
 .columnTitle{
     font-size: 24px;
 }
@@ -5,10 +7,15 @@
     display: flex;
     justify-content: center;
 }
-@media all and (max-width: 700px) {
-    #myTable{
-        display: flex;
-        flex-direction: column;
+ @media only screen and (max-width: 600px) {
+    .column{
+        display:flex;
+        flex-wrap:wrap;
+
     }
-    
-  }
+    .columnTitle{
+        font-size: 24px;
+        display:flex;
+        flex-wrap:wrap;
+    }
+}
