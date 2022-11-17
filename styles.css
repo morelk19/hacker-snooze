@@ -1,0 +1,14 @@
+.columnTitle{
+    font-size: 24px;
+}
+.interface{
+    display: flex;
+    justify-content: center;
+}
+@media all and (max-width: 700px) {
+    #myTable{
+        display: flex;
+        flex-direction: column;
+    }
+    
+  }
